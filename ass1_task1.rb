@@ -26,33 +26,55 @@ keyboard - 105
 
 
 
-class Shop
+COMPANY_NAME = "Lakeme"
+$productcompany = "Lakeme-style"
+class Product
+    @@inc=1
+    
+    def initialize(name,price)
+        @product_name = name
+        @product_price = price
+    end
   
-   def gstcount(pname,price)
-        @pname=pname
-        @price=price
-        puts "product details"
-        puts "#{@pname}: #{@price}"
-        @result=(@price.to_i*@gst.to_i)/ 100
-        #puts "#{@result}"
-        @keyboard=(@result+5)
-        puts "keyboard:#{@keyboard}"
+    def getdetails
+      
+        puts "---------------------------- For Product #{@@inc} ------------------------------- "
+        print "Enter Your name :"
+        @fname=gets
+        print "Enter GST:"
+        @gst=gets
+        puts
     end
     
-    def display
-        puts "enter your name"
-        @name=gets
-        puts "enter gst"
-        @gst=gets
-        puts "welcome #{@name}"+"Your invoice with #{@gst}% gst are below"
-
+    def gstcount
+        count_gst = (@product_price.to_i * @gst.to_i)/100
+        @totalprice = count_gst.to_i + @product_price.to_i
     end
+    
+    def printdetails
+         
+        puts "Welcome #{@fname} Your invoice with #{@gst}% gst are below"
+        puts
+       
+        puts "product details :"
+        puts
+        puts "#{$productcompany} : #{@product_name} - #{@totalprice}"
+        puts
+        @@inc=@@inc + 1
+    end
+    
+
 end
 
+product1=Product.new("Sunscreen","450")
+product1.getdetails
+product1.gstcount
+product1.printdetails
 
-shop=Shop.new
-shop.display
-shop.gstcount("rutu",100)
+product2=Product.new("Lipstic","200")
+product2.getdetails
+product2.gstcount
+product2.printdetails
 
 
 
